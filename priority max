@@ -1,0 +1,94 @@
+#implementacion prioirity queue
+from pip._vendor.progress import Infinite
+
+
+def max_heapify(A,i, size) :
+    l = i*2 + 1
+    r = 2*i + 2
+
+
+
+    if l < size  and A[l] > A[i]:
+        largest = l
+    else :
+        largest = i
+    if r < size and A[r] > A[largest]:
+        largest = r
+    if largest != i:
+        change  = A[i]
+        A[i] = A[largest]
+        A[largest] = change
+        max_heapify(A, largest, size)
+
+def build_max_heap(A):
+    size = len(A)
+    for i in range(0, size//2  ):
+        j = size//2 - i - 1
+        max_heapify(A, j, size)
+
+def heap_sort(A):
+    build_max_heap(A)
+
+
+    for i in range(1, len(A)):
+        j = len(A) - i
+        change = A[0]
+        A[0] = A[j]
+        A[j] = change
+        max_heapify(A, 0 , j)
+
+
+#Priority queue
+
+def heap_maximun(A):
+    return A[0]
+def heap_extract_max(A):
+    size = len(A)
+    if size < 1:
+        print("ERROR ABORT!!")
+        return
+    max = A[0]
+    A[0] = A[size -1]
+    A.pop(size-1)
+    size = size - 1
+    max_heapify(A, 0, size )
+    return  max
+def heap_increse_key(A,  i , key):
+    print(key)
+    if key < A[i]:
+        print ("error")
+        return
+    A[i] = key
+    while i > 0 and A[(i- 1 )//2] <  A[i]:
+
+        change = A[i]
+        A[i ] = A[(i- 1 )//2]
+        A[(i- 1 )//2] = change
+
+        i = (i - 1 )//2
+def max_heap_insert(A, key):
+    size = len(A) + 1
+    A.append(-100000000)
+    heap_increse_key(A, size - 1, key)
+A = [4, 1, 3, 2 ,16 ,9 , 10 , 14, 8 , 7, 1999 , 12313 , 1231,2]
+B = [9 , 5, 8 , 3, 4 , 6 , 2, 1, 1 ]
+
+build_max_heap(B)
+print (B)
+heap_extract_max(B)
+print(B)
+
+heap_extract_max(B)
+print(B)
+heap_increse_key(B,6, 10)
+print(B)
+
+max_heap_insert(B,20)
+print(B)
+C = []
+for i in range(0, 10):
+    c = input()
+    max_heap_insert(C,int(c))
+print (C)
+build_max_heap(C)
+print(C)
