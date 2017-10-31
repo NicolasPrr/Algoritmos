@@ -75,15 +75,13 @@ min  = 1000
 id = 1000000
 
 for i in range(T):
-    b = (sys.stdin.readline().strip())
+    bs = (sys.stdin.readline().strip())
 
-    if graph.isVisited[b] != 0:
-
-       # print(graph.distance[b] )
-      #  print( "mint" + str(min))
-        if min >= graph.distance[b] :
-            min = graph.distance[b]
-        if min >= graph.distance[b] and  id > int(b):
-            id = int(b)
+    if graph.isVisited[bs] != 0:
+        if min > graph.distance[bs]:
+          id = int(bs)
+          min = graph.distance[bs]
+        elif  min == graph.distance[bs] and id > int(bs):
+          id = int(bs)
+        
 print (id)
-
